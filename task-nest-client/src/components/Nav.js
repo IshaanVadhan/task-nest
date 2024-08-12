@@ -13,7 +13,7 @@ export default function Nav() {
 
   return (
     <>
-      <div className="mb-6 flex justify-between items-center w-full">
+      <div className="mb-6 flex justify-between items-center w-full flex-col sm:flex-row">
         <div>
           <h1
             className="text-3xl font-bold cursor-pointer"
@@ -22,11 +22,18 @@ export default function Nav() {
             Task
             <span className="text-emerald-500">Nest</span>
           </h1>
+          {user?.name && (
+            <p className="text-gray-300 mt-1 sm:hidden block text-center">
+              Hello, {user.name}!
+            </p>
+          )}
         </div>
         {user?.name && (
-          <div className="flex space-x-4 items-center">
+          <div className="flex space-x-4 items-center mt-4 sm:mt-0">
             {user?.name && (
-              <p className="text-gray-300 mt-1">Hello, {user.name}!</p>
+              <p className="text-gray-300 mt-1 sm:block hidden">
+                Hello, {user.name}!
+              </p>
             )}
             <button
               onClick={handleCreateTask}
