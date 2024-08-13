@@ -14,16 +14,16 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <AuthProvider>
-      <ProtectedRoute>
-        <html lang="en">
-          <body className={inter.className}>
+      <html lang="en">
+        <body className={inter.className}>
+          <ProtectedRoute>
             <div className="min-h-screen p-6 bg-dark-100 text-gray-100">
               <Nav />
               {children}
             </div>
-          </body>
-        </html>
-      </ProtectedRoute>
+          </ProtectedRoute>
+        </body>
+      </html>
     </AuthProvider>
   );
 }
