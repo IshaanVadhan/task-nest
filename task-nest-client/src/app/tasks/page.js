@@ -4,18 +4,23 @@ import { useState, useEffect } from "react";
 import axiosInstance from "../../utils/axios";
 import TaskCard from "../../components/TaskCard";
 import { useRouter } from "next/navigation";
+import LoadingScreen from "../loading";
 
 export default function TasksPage() {
   const [tasks, setTasks] = useState([]);
+  const [loadingTasks, setLoadingTasks] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
     const fetchTasks = async () => {
+      setLoadingTasks(true);
       try {
         const response = await axiosInstance.get("/tasks");
         setTasks(response.data);
       } catch (error) {
         console.error("Error fetching tasks:", error);
+      } finally {
+        setLoadingTasks(false);
       }
     };
 
@@ -35,7 +40,9 @@ export default function TasksPage() {
     }
   };
 
-  return (
+  return loadingTasks ? (
+    <LoadingScreen />
+  ) : (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
       {tasks.length > 0 ? (
         tasks.map((task) => (
