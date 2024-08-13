@@ -15,7 +15,7 @@ export default function Home() {
   const [error, setError] = useState("");
   const router = useRouter();
 
-  const { login } = useAuth();
+  const { login, user } = useAuth();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -43,7 +43,7 @@ export default function Home() {
     }
   };
 
-  return (
+  return !user ? (
     <div className="flex justify-center items-center mt-20">
       <div className="bg-dark-200 p-8 rounded-md shadow-lg w-full max-w-md">
         <h1 className="text-2xl font-medium text-center">
@@ -117,5 +117,5 @@ export default function Home() {
         </div>
       </div>
     </div>
-  );
+  ) : null;
 }
